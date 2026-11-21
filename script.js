@@ -17,6 +17,17 @@
     if (header) header.classList.toggle('is-scrolled', y > 24);
     if (toTop)  toTop.classList.toggle('show', y > 600);
     spy();
+    heroParallax(y);
+  }
+
+  /* ---------- Hero parallax ---------- */
+  var bgAnim = $('.bg-anim');
+  function heroParallax(y) {
+    var hero = $('#hero');
+    if (!hero || !bgAnim) return;
+    var heroBottom = hero.offsetTop + hero.offsetHeight;
+    if (y > heroBottom) return;
+    bgAnim.style.transform = 'translateY(' + (y * 0.12) + 'px)';
   }
 
   /* ---------- 2. Mobil menyu ---------- */
@@ -101,10 +112,14 @@
 
   if ('IntersectionObserver' in window) {
     var rObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en, i) {
+      entries.forEach(function (en) {
         if (!en.isIntersecting) return;
         var el = en.target;
-        setTimeout(function () { el.classList.add('in'); }, Math.min(i * 45, 260));
+        var parent = el.parentElement;
+        var siblings = parent ? Array.prototype.slice.call(parent.children) : [el];
+        var idx = siblings.indexOf(el);
+        var delay = Math.max(0, Math.min(idx * 70, 350));
+        setTimeout(function () { el.classList.add('in'); }, delay);
         rObs.unobserve(el);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
