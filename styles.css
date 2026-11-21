@@ -666,6 +666,9 @@ button{font:inherit}
   border-top:1px solid var(--line);
 }
 .footer-bottom p{margin:0;font-size:.79rem;color:var(--muted)}
+.footer-credit{flex-basis:100%;text-align:center;margin-top:6px !important}
+.footer-credit a{color:var(--accent,#6ea8fe);text-decoration:none;font-weight:600}
+.footer-credit a:hover{text-decoration:underline}
 
 /* ---------- Floating WhatsApp ---------- */
 .wa-float{
